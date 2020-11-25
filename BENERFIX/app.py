@@ -18,74 +18,7 @@ from flask import Flask, request, jsonify, render_template,Blueprint,url_for
 import os
 import pickle
 
-
-data= pd.read_csv("barubuat.csv",sep=";", encoding="ISO-8859-1")
-#data.head(10)
-data2=data.drop(['league', 'region', 'nationality', 'condition','weight'], axis=1)
-data2.index+=1
-###mengubah huruf jd lowercase
-data2["name"] = data2["name"].str.lower()
-data2["team"] = data2["team"].str.lower()
-data2["position"] = data2["position"].str.lower()
-data2["playingstyle"] = data2["playingstyle"].str.lower()
-#########nambah data
-data2["positions"] = data2["position"]
-
-######menjadikan label position jadi tipe kategori
-data2["positions"]= data2.position.astype("category").cat.codes
-data2['positions'] = data2['positions'].astype('category')
-
-# label_encoder object knows how to understand word labels. 
-label_encoder = preprocessing.LabelEncoder()
-#Create a label (category) encoder object
-le = preprocessing.LabelEncoder()
-# Fit the encoder to the pandas column
-le.fit(data2['positions'])
-
-#1->0.5 ,0-1
-#scaler = MinMaxScaler()
-
-#kategori angka
-data2['binage'] = pd.cut(x=data2['age'], bins=[15, 23, 35, 55], labels=['1','2','3'])
-data2['binhei'] = pd.cut(x=data2['height'], bins=[160, 169, 179, 189, 210], labels=['1','2','3','4'])
-bins = [100000, 11999999, 41999999, 81999999, 125999999, 170999999]#value
-labels = [1,2,3,4,5]
-data2['binval'] = pd.cut(data2['value'], bins,labels=labels)
-bins2 = [100, 999999, 15999999, 35999999, 56999999, 90000000]
-labels2 = [1,2,3,4,5]
-data2['binsa'] = pd.cut(data2['salary'], bins2,labels=labels2)
-bins3 = [60, 67, 75, 83, 91, 100]
-labels3 = [1,2,3,4,5]
-data2['binov'] = pd.cut(data2['overall'], bins3,labels=labels3)
-
-
-data2[['binage','binhei','binval','binsa','binov']] = data2[['binage','binhei','binval','binsa','binov']].values.astype(float)
-data2[['binage','binhei','binval','binsa','binov']] = data2[['binage','binhei','binval','binsa','binov']].fillna(0.0).astype(int)
-#data2[['positions']].values.astype(float)
-#data2[['binage','binhei','binval','binsa','binov']] = scaler.fit_transform(data2[['binage','binhei','binval','binsa','binov']].values)
-######rumus euclidean distance
-#data2[['positions']]=scaler.fit_transform(data2[['positions']])
-#a3= data2['positions']
-b3= data2['binhei']
-c3= data2['binage']
-d3= data2['binov']
-e3= data2['binval']
-f3= data2['binsa']
-############################
-#data2['dst3']= np.sqrt((a3 - b3 - c3 - d3 - e3 - f3)**2)
-#data2=data.drop(['binage','binhei','binval','binsa','binov'], axis=1)
-#print(data2)
-
-
-###flask
-app = Flask(__name__)
-@app.route('/', methods=['POST','GET'])
-def index():  
-    
-    return render_template('index.html')
-
-
-@app.route('/form', methods=['POST','GET'])
+##########################################################Sorry im delete this part
 def form():  
     if request.method == 'POST':
         ar = request.form['ar'] #int di sini mengubah inputan menjadi int
