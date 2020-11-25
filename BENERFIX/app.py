@@ -18,7 +18,7 @@ from flask import Flask, request, jsonify, render_template,Blueprint,url_for
 import os
 import pickle
 
-##########################################################Sorry im delete this part
+##########################################################Sorry im delete this part for personal reason. For additional questions email me at arisanita98@gmail.com
 def form():  
     if request.method == 'POST':
         ar = request.form['ar'] #int di sini mengubah inputan menjadi int
